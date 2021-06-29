@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+{% load static %}
+<style>
+    ul#menu {
+        padding: 0
+    }
+    ul#menu li {
+        display: inline;
+    }
+    ul#menu li a {
+        background-color: #dd3535;
+        color: #c9bdbd;
+        padding: 5px 10px;
+        text-decoration: none;
+        font: 700 15px cursive;
+        border-radius: 4px 4px 0 0;
+    }
+    ul#menu li a:hover {
+        background-color: #c9bdbd;
+        color: #dd3535;
+        font: 700 18px fantasy;
+        border-radius: 4px 4px 0 0;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Master View</title>
+</head>
+<body>
+
+<center>
+    <h1 ><font color="#366092">Flood Mapping</font></h1>
+<ul id="menu">
+        <li><a href="{% url 'admin_settings' %}">Home</a></li>
+        <li><a href="{% url 'admin_pic_pool_view' %}">Pic Pool</a></li>
+        <li><a href="{% url 'admin_location_master_view' %}">Location</a></li>
+        <li><a href="{% url 'admin_category_master_view' %}">Category</a></li>
+        <li><a href="{% url 'admin_changepassword' %}">Change Password</a></li>
+        <li><a href="{% url 'admin_home' %}">Back</a></li>
+    </ul>
+
+    <h2><font color="#366092">Category Master View</font></h2>
+
+    <form name="frm" action="" method="post">
+            {% csrf_token %}
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+        {% for c in category_list %}
+        <tr class="info ">
+            <td>{{ c.id }}</td>
+            <td>{{ c.category_name }}</td>
+            <td><a class="nav-link" href="../admin_category_master_delete?id={{c.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+		{{msg}}
+        <br/>
+        <a href="{% url 'admin_category_master_add' %}">Add Category</a></h1>
+    </form>
+</center>
+</body>
+</html>
