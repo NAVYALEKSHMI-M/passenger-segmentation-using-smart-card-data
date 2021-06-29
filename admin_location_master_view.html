@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+{% load static %}
+<style>
+    ul#menu {
+        padding: 0
+    }
+    ul#menu li {
+        display: inline;
+    }
+    ul#menu li a {
+        background-color: #dd3535;
+        color: #c9bdbd;
+        padding: 5px 10px;
+        text-decoration: none;
+        font: 700 15px cursive;
+        border-radius: 4px 4px 0 0;
+    }
+    ul#menu li a:hover {
+        background-color: #c9bdbd;
+        color: #dd3535;
+        font: 700 18px fantasy;
+        border-radius: 4px 4px 0 0;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location Master View</title>
+</head>
+<body>
+
+<center>
+    <h1 ><font color="#366092">Flood Mapping</font></h1>
+<ul id="menu">
+        <li><a href="{% url 'admin_settings' %}">Home</a></li>
+        <li><a href="{% url 'admin_pic_pool_view' %}">Pic Pool</a></li>
+        <li><a href="{% url 'admin_location_master_view' %}">Location</a></li>
+        <li><a href="{% url 'admin_category_master_view' %}">Category</a></li>
+        <li><a href="{% url 'admin_changepassword' %}">Change Password</a></li>
+        <li><a href="{% url 'admin_home' %}">Back</a></li>
+    </ul>
+
+    <h2><font color="#366092">Location Master View</font></h2>
+
+    <form name="frm" action="" method="post">
+            {% csrf_token %}
+        <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Location</th>
+            <th>Address</th>
+            <th>Lat/Lng</th>
+            <th>Radius</th>
+            <th>Remarks</th>
+            <th>Action</th>
+        </tr>
+        {% for l in location_list %}
+        <tr class="info ">
+            <td>{{ l.id }}</td>
+            <td>{{ l.loc_name }}</td>
+            <td>{{ l.addr1 }},{{ l.addr2 }},{{ l.addr3 }},{{ l.pin }}</td>
+            <td>{{ l.lat }}/{{ l.lng }}</td>
+            <td>{{ l.radius }}</td>
+            <td>{{ l.remarks }}</td>
+            <td><a class="nav-link" href="../admin_location_master_delete?id={{l.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+        <br/>
+        <a href="{% url 'admin_location_master_add' %}">Add Location</a>
+    </form>
+</center>
+</body>
+</html>
